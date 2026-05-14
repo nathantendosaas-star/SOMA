@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1B4332;
+  --color-primary-light: #2D6A4F;
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: #D4A017;
+  --color-surface: var(--surface);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-card: var(--surface-card);
+  --color-content: var(--content);
+  --color-content-muted: var(--content-muted);
+  --color-border: var(--border);
+  --color-muted: #6B7280;
+  --color-success: #2D6A4F;
+  --color-error: #C0392B;
+
+  --font-display: "DM Serif Display", serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  :root {
+    --primary: #1B4332; /* Deep Forest Green */
+    --primary-foreground: #2D6A4F;
+    --secondary: #D4AF37; /* Ugandan Gold */
+    --accent: #8B0000; /* Deep Rubine (Uganda Flag Red) */
+    --surface: #F8F9FA;
+    --surface-card: #FFFFFF;
+    --border: #E9ECEF;
+    --content: #1A1A1A;
+    --muted: #6C757D;
+  }
+
+  .dark {
+    --surface: #0f1715; /* Deep Obsidian Green */
+    --surface-dark: #070a09;
+    --surface-card: #161e1c;
+    --content: #f8fafc; /* Bright slate white */
+    --content-muted: #94a3b8; /* Readable gray */
+    --primary-foreground: #4ade80;
+    --border: #1e293b;
+  }
+}
+
+/* KaTeX overrides for Tailwind Prose */
+.prose .katex-display {
+  margin: 1.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.5em;
+}
+
+.prose .katex {
+  font-size: 1.1em;
+}
+
+.prose .math-display {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
