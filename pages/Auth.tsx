@@ -13,7 +13,7 @@ export const Auth = () => {
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [schoolName, setSchoolName] = useState('');
-  const [district, setDistrict] = useState(DISTRICTS[0]);
+  const [district, setDistrict] = useState('');
   const [teacherId, setTeacherId] = useState('');
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
@@ -111,7 +111,7 @@ export const Auth = () => {
                   <Input 
                     value={fullName} 
                     onChange={e => setFullName(e.target.value)} 
-                    placeholder="Musa Okello"
+                    placeholder="John Doe"
                   />
                 </div>
                 <div>
@@ -119,7 +119,7 @@ export const Auth = () => {
                   <Input 
                     value={schoolName} 
                     onChange={e => setSchoolName(e.target.value)} 
-                    placeholder="Buddo SS"
+                    placeholder="Enter your school name"
                   />
                 </div>
               </div>
@@ -132,6 +132,7 @@ export const Auth = () => {
                     onChange={e => setDistrict(e.target.value)}
                     className="w-full rounded-xl border border-border bg-white dark:bg-surface px-4 py-2 text-sm text-content focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   >
+                    <option value="" disabled>Select District</option>
                     {DISTRICTS.map(d => <option key={d} value={d}>{d}</option>)}
                   </select>
                 </div>
