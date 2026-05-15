@@ -25,6 +25,8 @@ import { DocumentView } from './pages/DocumentView';
 import { ManageUsers } from './pages/ManageUsers';
 import { PrintQueue } from './pages/PrintQueue';
 import { AdminPortal } from './pages/AdminPortal';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
 
 import { LessonPage } from './pages/generate/LessonPage';
 import { QuestionsPage } from './pages/generate/QuestionsPage';
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
   {
     path: '/auth',
     element: <><ScrollToTop /><PageTransition><Auth /></PageTransition></>,
+  },
+  {
+    path: '/privacy',
+    element: <><ScrollToTop /><PageTransition><PrivacyPolicy /></PageTransition></>,
+  },
+  {
+    path: '/terms',
+    element: <><ScrollToTop /><PageTransition><TermsOfService /></PageTransition></>,
   },
   {
     element: <><ScrollToTop /><ProtectedRoute /></>,

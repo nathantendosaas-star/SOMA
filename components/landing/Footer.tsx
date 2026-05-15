@@ -18,19 +18,19 @@ export const Footer = () => {
               Smart school software designed for Ugandan teachers and schools. Built to align with NCDC and UNEB standards.
             </p>
             <div className="flex gap-4">
-              <SocialLink icon={Facebook} />
-              <SocialLink icon={Twitter} />
-              <SocialLink icon={Instagram} />
-              <SocialLink icon={Linkedin} />
+              <SocialLink icon={Facebook} href="https://facebook.com" />
+              <SocialLink icon={Twitter} href="https://twitter.com" />
+              <SocialLink icon={Instagram} href="https://instagram.com" />
+              <SocialLink icon={Linkedin} href="https://linkedin.com" />
             </div>
           </div>
           
           <div>
             <h4 className="font-bold text-lg mb-6">Product</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><a href="#features" className="hover:text-primary transition-colors">Features</a></li>
-              <li><a href="#how-it-works" className="hover:text-primary transition-colors">How It Works</a></li>
-              <li><a href="#pricing" className="hover:text-primary transition-colors">Pricing</a></li>
+              <li><a href="/#features" className="hover:text-primary transition-colors">Features</a></li>
+              <li><a href="/#how-it-works" className="hover:text-primary transition-colors">How It Works</a></li>
+              <li><a href="/#pricing" className="hover:text-primary transition-colors">Pricing</a></li>
               <li><Link to="/auth" className="hover:text-primary transition-colors">Teacher Dashboard</Link></li>
               <li><Link to="/auth" className="hover:text-primary transition-colors">School Portal</Link></li>
             </ul>
@@ -39,11 +39,10 @@ export const Footer = () => {
           <div>
             <h4 className="font-bold text-lg mb-6">Company</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><a href="#about" className="hover:text-primary transition-colors">Vision</a></li>
-              <li><a href="#faq" className="hover:text-primary transition-colors">FAQ</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Career</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
+              <li><a href="/#about" className="hover:text-primary transition-colors">Vision</a></li>
+              <li><a href="/#faq" className="hover:text-primary transition-colors">FAQ</a></li>
+              <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
           
@@ -52,11 +51,11 @@ export const Footer = () => {
             <ul className="space-y-4 text-sm text-gray-400">
               <li className="flex items-start gap-3">
                 <Mail size={18} className="text-primary mt-0.5" />
-                <span>support@soma.ug</span>
+                <a href="mailto:support@soma.ug" className="hover:text-primary transition-colors">support@soma.ug</a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={18} className="text-primary mt-0.5" />
-                <span>+256 700 000000</span>
+                <a href="tel:+256700000000" className="hover:text-primary transition-colors">+256 700 000000</a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-primary mt-0.5" />
@@ -69,9 +68,8 @@ export const Footer = () => {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} Soma Uganda. All rights reserved.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Cookie Settings</a>
+            <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
           </div>
         </div>
       </div>
@@ -79,8 +77,8 @@ export const Footer = () => {
   );
 };
 
-const SocialLink = ({ icon: Icon }: { icon: any }) => (
-  <a href="#" className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300">
+const SocialLink = ({ icon: Icon, href }: { icon: any; href: string }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300">
     <Icon size={18} />
   </a>
 );
