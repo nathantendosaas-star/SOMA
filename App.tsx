@@ -25,6 +25,7 @@ import { DocumentView } from './pages/DocumentView';
 import { ManageUsers } from './pages/ManageUsers';
 import { PrintQueue } from './pages/PrintQueue';
 import { AdminPortal } from './pages/AdminPortal';
+import { AdminLogin } from './pages/AdminLogin';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: '/auth',
     element: <><ScrollToTop /><PageTransition><Auth /></PageTransition></>,
+  },
+  {
+    path: '/admin-login',
+    element: <><ScrollToTop /><AdminLogin /></>,
   },
   {
     path: '/privacy',
