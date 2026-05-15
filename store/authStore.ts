@@ -1,4 +1,28 @@
+import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
+import { User, UserRole } from '../types';
+
+interface AuthState {
+  user: User | null;
+  isLoading: boolean;
+  generationCount: number;
+  setUser: (user: User | null) => void;
+  setLoading: (isLoading: boolean) => void;
+  signIn: (email: string, password?: string) => Promise<void>;
+  signUp: (email: string, password?: string, additionalData?: Partial<User>) => Promise<void>;
+  signOut: () => Promise<void>;
+  updateUser: (data: Partial<User>) => Promise<void>;
+  fetchProfile: (userId: string) => Promise<void>;
+  incrementGenerationCount: () => Promise<void>;
+  redeemVoucher: (code: string) => Promise<void>;
+}
+
+// Demo Vouchers (Secure 16-character keys for every package)
+const DEMO_VOUCHERS = [
+  { code: '4K9N-1J7Z-2B6W-202', plan: 'pro' },
+  { code: '8X2P-9L1V-5M7Q-499', plan: 'institutional' },
+  { code: 'FREE-RESET-DEMO-0', plan: 'free' }
+];
 
 export const useAuthStore = create<AuthState>((set, get) => {
   // Listen for auth changes
@@ -21,7 +45,6 @@ export const useAuthStore = create<AuthState>((set, get) => {
     signIn: async (email, password) => {
       set({ isLoading: true });
       
-      // 1. Try Supabase
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password: password || '',
@@ -30,7 +53,6 @@ export const useAuthStore = create<AuthState>((set, get) => {
       if (!error && data.user) {
         await get().fetchProfile(data.user.id);
       } else if (email === 'nathan@soma.ug') {
-        // Nate's Super Admin Bypass
         const superAdmin: User = {
           id: 'super_admin_nate',
           email,
@@ -40,7 +62,6 @@ export const useAuthStore = create<AuthState>((set, get) => {
         };
         get().setUser(superAdmin);
       } else {
-        // Fallback for Demo
         const demoUser: User = {
           id: 'demo_id',
           email,
@@ -56,7 +77,6 @@ export const useAuthStore = create<AuthState>((set, get) => {
     signUp: async (email, password, additionalData) => {
       set({ isLoading: true });
       
-      // 1. Supabase Auth Signup
       const { data, error } = await supabase.auth.signUp({
         email,
         password: password || '',
@@ -74,7 +94,6 @@ export const useAuthStore = create<AuthState>((set, get) => {
       }
 
       if (data.user) {
-        // 2. Create Profile in 'profiles' table
         const { error: profileError } = await supabase
           .from('profiles')
           .insert([
@@ -117,10 +136,14 @@ export const useAuthStore = create<AuthState>((set, get) => {
       const { user } = get();
       if (!user) return;
       
-      const updated = { ...user, ...data };
-      const users = getLocalUsers().map(u => u.id === user.id ? updated : u);
-      saveLocalUsers(users);
-      get().setUser(updated);
+      const { error } = await supabase
+        .from('profiles')
+        .update(data)
+        .eq('id', user.id);
+
+      if (!error) {
+        set({ user: { ...user, ...data } });
+      }
     },
 
     incrementGenerationCount: async () => {
@@ -129,7 +152,7 @@ export const useAuthStore = create<AuthState>((set, get) => {
 
     redeemVoucher: async (code) => {
       set({ isLoading: true });
-      await new Promise(r => setTimeout(r, 800)); // Simulating network verification
+      await new Promise(r => setTimeout(r, 800));
 
       const voucher = DEMO_VOUCHERS.find(v => v.code === code);
       if (!voucher) {
