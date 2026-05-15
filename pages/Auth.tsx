@@ -63,8 +63,8 @@ export const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-surface p-4 py-12">
-      <div className="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-sm border border-border">
+    <div className="min-h-screen flex items-center justify-center bg-surface p-4 py-12 transition-colors duration-500">
+      <div className="w-full max-w-2xl bg-white dark:bg-surface-card p-8 rounded-2xl shadow-sm border border-border transition-colors">
         <div className="flex justify-center mb-6">
           <Link to="/" className="hover:opacity-80 transition-opacity">
             <div className="h-12 w-12 rounded-xl bg-primary flex items-center justify-center">
@@ -130,7 +130,7 @@ export const Auth = () => {
                   <select 
                     value={district}
                     onChange={e => setDistrict(e.target.value)}
-                    className="w-full rounded-xl border border-border bg-white px-4 py-2 text-sm text-content focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    className="w-full rounded-xl border border-border bg-white dark:bg-surface px-4 py-2 text-sm text-content focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   >
                     {DISTRICTS.map(d => <option key={d} value={d}>{d}</option>)}
                   </select>
@@ -150,7 +150,7 @@ export const Auth = () => {
                 <select 
                   value={role}
                   onChange={e => setRole(e.target.value as UserRole)}
-                  className="w-full rounded-xl border border-border bg-white px-4 py-2 text-sm text-content focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full rounded-xl border border-border bg-white dark:bg-surface px-4 py-2 text-sm text-content focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 >
                   <option value="principal">Principal (Full Access)</option>
                   <option value="admin">Admin</option>
@@ -170,7 +170,7 @@ export const Auth = () => {
                       className={`px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
                         selectedSubjects.includes(subj) 
                           ? 'bg-primary text-white border-primary' 
-                          : 'bg-white text-content border-border hover:border-primary/50'
+                          : 'bg-white dark:bg-surface text-content border-border hover:border-primary/50'
                       }`}
                     >
                       {subj}
@@ -190,7 +190,7 @@ export const Auth = () => {
                       className={`px-4 py-2 rounded-lg border text-xs font-medium transition-colors ${
                         selectedClasses.includes(cls) 
                           ? 'bg-secondary text-white border-secondary' 
-                          : 'bg-white text-content border-border hover:border-secondary/50'
+                          : 'bg-white dark:bg-surface text-content border-border hover:border-secondary/50'
                       }`}
                     >
                       {cls}
